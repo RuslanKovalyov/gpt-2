@@ -1,6 +1,18 @@
 import numpy as np
-import tensorflow as tf
-from tensorflow.contrib.training import HParams
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+# from tensorflow.contrib.training import HParams
+class HParams:
+    def __init__(self, n_vocab=0, n_ctx=1024, n_embd=768, n_head=12, n_layer=12):
+        self.n_vocab = n_vocab
+        self.n_ctx = n_ctx
+        self.n_embd = n_embd
+        self.n_head = n_head
+        self.n_layer = n_layer
+
+    def override_from_dict(self, dictionary):
+        self.__dict__.update(dictionary)
 
 def default_hparams():
     return HParams(

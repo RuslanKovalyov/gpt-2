@@ -4,21 +4,37 @@ import fire
 import json
 import os
 import numpy as np
-import tensorflow as tf
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 import model, sample, encoder
 
 def interact_model(
-    model_name='124M',
+    model_name='774M',
     seed=None,
     nsamples=1,
     batch_size=1,
     length=None,
-    temperature=1,
-    top_k=0,
-    top_p=1,
-    models_dir='models',
-):
+    temperature=0.8,
+    top_k=40,
+    top_p=10,
+    models_dir='models',):
+    
+   # Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITION
+   #python3 src/interactive_conditional_samples.py
+
+
+    # model_name='774M',
+    # seed=None, # This is the seed for the random number generator. You can set this to any integer you want to reproduce the same results every time you run the model.
+    # nsamples=1, # This is the number of sample texts you want to generate.
+    # batch_size=1, #  This is the number of samples to generate at the same time. Batch generation is more memory-efficient.
+    # length=None, # This is the number of tokens in the generated text. If None, is determined by model hyperparameters.
+    # temperature=1, # This is the randomness in the generated text. Lower values means the generated text will be more predictable.
+    # top_k=0, # This is a parameter for controlling the diversity of the output. The model will only consider the top_k options at each step, which can prevent the model from outputting rare words.
+    # top_p=1, # This is another parameter for controlling the diversity of the output. The model considers the cumulative probability of the most likely tokens, and chooses from the tokens with the highest cumulative probability. Set this to 1 to disable it.
+    # models_dir='models',
+
     """
     Interactively run the model
     :model_name=124M : String, which model to use
